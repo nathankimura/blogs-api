@@ -10,7 +10,7 @@ const loginValidate = async (req, _res, next) => {
   }
   
   const userMail = await User.findOne({ where: { email } });
-  console.log(userMail);
+  // console.log(userMail);
 
   if (!userMail || userMail.password !== password) {
     const err = new Error();
