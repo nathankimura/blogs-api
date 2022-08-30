@@ -7,10 +7,11 @@ const { JWT_SECRET } = process.env;
 const validateJWT = async (req, res, next) => {
   const token = req.headers.authorization;
 
+  if (!token) {
+    return res.status(401).json({ message: 'Token not found' });
+  }
+
   try {
-    if (!token) {
-      return res.status(401).json({ error: 'Token não encontrado' });
-    }
     const decoded = jwt.verify(token, JWT_SECRET);
 
     const email = await User.findOne({ where: { email: decoded.data.email } });
@@ -19,10 +20,10 @@ const validateJWT = async (req, res, next) => {
       return res.status(401).json({ message: 'Erro ao procurar usuário do token' });
     }
     req.email = email;
-    next();
   } catch (err) {
-    return res.status(401).json({ message: err.message });
+    return res.status(401).json({ message: 'Expired or invalid token' });
   }
+  next();
 };
 
 module.exports = validateJWT;

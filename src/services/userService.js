@@ -16,6 +16,18 @@ const userService = {
     const token = jwt.sign({ data: user }, JWT_SECRET, jwtConfig);
     return token;
   },
+  get: async () => {
+    const result = await User.findAll({
+      attributes: { exclude: ['password'] },
+    });
+    return result;
+  },
+  getById: async (id) => {
+    const result = await User.findByPk(id, {
+      attributes: { exclude: ['password'] },
+    });
+    return result;
+  },
 };
 
 module.exports = userService;

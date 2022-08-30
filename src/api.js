@@ -22,6 +22,9 @@ app.post(
   userController.create,
   );
 
+app.get('/user', validateJWT, userController.get);
+
+app.get('/user/:id', validateJWT, userController.getById); 
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`
 module.exports = app;
