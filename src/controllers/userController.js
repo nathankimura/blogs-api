@@ -14,6 +14,7 @@ const userController = {
 //    console.log(result);
     res.status(200).json(result);
   },
+
   getById: async (req, res) => {
     const { id } = req.params;
     const result = await userService.getById(id);
@@ -24,6 +25,11 @@ const userController = {
     throw err;
     }
     res.status(200).json(result);
+  },
+
+  delete: async (req, res) => {
+    await userService.delete(req.id);
+    res.status(204).end();
   },
 };
 

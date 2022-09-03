@@ -31,6 +31,8 @@ app.get('/user/:id', validateJWT, userController.getById);
 app.post('/categories', validateJWT, categoryController.create);
 
 app.get('/categories', validateJWT, categoryController.get);
+
+app.delete('/user/me', validateJWT, userController.delete);
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`
 module.exports = app;

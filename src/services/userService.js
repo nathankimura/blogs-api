@@ -28,6 +28,13 @@ const userService = {
     });
     return result;
   },
+  delete: async (id) => {
+    await User.destroy({
+      where: {
+        id,
+      },
+    });
+  },
 };
 
 module.exports = userService;

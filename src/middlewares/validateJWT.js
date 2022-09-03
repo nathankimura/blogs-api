@@ -13,13 +13,15 @@ const validateJWT = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
+    // console.log(decoded);
+    const actualUserId = await User.findOne({ where: { id: decoded.data.id } });
+    const { id } = actualUserId.dataValues;
+    // console.log(id);
 
-    const email = await User.findOne({ where: { email: decoded.data.email } });
-
-    if (!email) {
+    if (!actualUserId) {
       return res.status(401).json({ message: 'Erro ao procurar usuário do token' });
     }
-    req.email = email;
+    req.id = id;
   } catch (err) {
     return res.status(401).json({ message: 'Expired or invalid token' });
   }
