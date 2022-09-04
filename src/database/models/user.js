@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     image: DataTypes.STRING,
   }, {
+    updatedAt: false,
     timestamps: false,
     tableName: 'Users',
   });

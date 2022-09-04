@@ -8,16 +8,15 @@ module.exports = (sequelize, DataTypes) => {
     },
     name: DataTypes.STRING,
   }, {
+    updatedAt: false,
     timestamps: false,
     tableName: 'Categories'
   });
-
-/*   User.associate = (models) => {
-    Job.hasOne(models.BlogPosts, {
-      foreignKey: "userId",
-      as: "Users"
+  Category.associate = (models) => {
+    Category.hasMany(models.PostCategory, {
+      foreignKey: 'id',
+      as: 'PostCategorys',
     });
   };
- */
   return Category;
 };
